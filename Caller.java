@@ -168,6 +168,102 @@ public class Caller extends JPanel  {
 		JButton hangUp = new JButton(configList.get(12));
 		hangUp.setBackground(Color.BLACK);
 
+		//Try and read images from the 'resources' folder and add them to the buttons
+		try {
+			Image img = ImageIO.read(getClass().getResource("resources/incoming.png"));
+			answer.setIcon(new ImageIcon(img));
+			img = ImageIO.read(getClass().getResource("resources/traffic.png"));
+			answerOther.setIcon(new ImageIcon(img));
+			img = ImageIO.read(getClass().getResource("resources/outgoing.png"));
+			call.setIcon(new ImageIcon(img));
+			img = ImageIO.read(getClass().getResource("resources/record.png"));
+			hangUp.setIcon(new ImageIcon(img));
+			img = ImageIO.read(getClass().getResource("resources/transfer.png"));
+			transferToA2.setIcon(new ImageIcon(img));
+			transferToA1.setIcon(new ImageIcon(img));
+		} catch (IOException ex) {
+			System.out.println("Error: " + ex);
+		}
+
+		//Code to seach for manifest and docklet based on Manifest number, this only works if default browser is Internet Explorer.
+/*
+		JButton mani = new JButton("Manifest");
+		JButton docket = new JButton("Docklet");
+		maniNumber = new JTextField();
+		JPanel searchMani = new JPanel(new GridLayout(1,3));
+		searchMani.add(maniNumber);
+		searchMani.add(mani);
+		searchMani.add(docket);
+		searchMani.setBackground(Color.BLACK);
+		searchMani.setOpaque(true);
+		mani.setBackground(Color.BLACK);
+		mani.setOpaque(true);
+		docket.setBackground(Color.BLACK);
+		docket.setOpaque(true);
+		mani.addActionListener(this);
+		docket.addActionListener(this);
+*/
+
+		//Make a new panel for the two answer buttons and setup the grid and color. 
+		JPanel callAnswer = new JPanel(new GridLayout(1,2));
+		callAnswer.add(answer);
+		callAnswer.add(answerOther);
+		callAnswer.setBackground(Color.BLACK);
+		callAnswer.setOpaque(true);
+
+	    //Make a new panel for the two transfer buttons 
+	    JPanel sasAvi = new JPanel(new GridLayout(1,2));
+	    sasAvi.add(transferToA1);
+	    sasAvi.add(transferToA2);
+	    sasAvi.setBackground(Color.BLACK);
+
+	    //Setup listeners for most buttons
+	    transferToA1.addActionListener(this);
+	    transferToA2.addActionListener(this);
+	    answerOther.addActionListener(this);
+	    callNumber.addActionListener(this);
+	    call.addActionListener(this);
+	    hangUp.addActionListener(this);
+	    answer.addActionListener(this);
+	    redial.addActionListener(this);
+
+	    //Setup the the two buttons to open the 'books'.
+	    JButton phoneBook = new JButton(configList.get(13));
+	    JButton airlineBook = new JButton(configList.get(14));
+	    JPanel books = new JPanel(new GridLayout(1,2));
+	    books.add(phoneBook);
+	    books.add(airlineBook);
+	    phoneBook.addActionListener(this);
+	    airlineBook.addActionListener(this);
+	    phoneBook.setBackground(Color.BLACK);
+	    airlineBook.setBackground(Color.BLACK);
+	    books.setBackground(Color.BLACK);
+
+	    //Add all the items to the frame in order.
+	    frame.setLayout(grid);
+	    frame.add(title);
+	    frame.add(subTitle);
+	    frame.add(phoneN);
+	    frame.add(callNumber);
+	    frame.add(call);
+	    frame.add(callAnswer);
+	    frame.add(hangUp);
+	    frame.add(redial);
+	    frame.add(transferCall);
+	    frame.add(sasAvi);
+	    frame.add(windowToFront);
+	    frame.add(books);
+	    //frame.add(searchMani);
+
+	    //Setup the border
+	    setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
+
+	    //Add the panel to out window
+	    add(panel, BorderLayout.PAGE_START);
+	}
+
+	//Create and show the GUI
+	public static void createAndShowGUI() {
 		
 	}
 
